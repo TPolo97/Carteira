@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>VirtuaWallet</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <fieldset>
+                <legend>Cadastrar Usuario</legend>
+                <h:outputText value="Usuário: "></h:outputText>
+                <h:inputText value="#{loginBean.usuario.nomeUsuario}"></h:inputText>
+                <h:outputText value="Senha: "></h:outputText>
+                <h:inputSecret value="#{loginBean.usuario.senha}"></h:inputSecret>
+                <h:outputText value="Saldo: "></h:outputText>
+                <h:inputText value="#{loginBean.usuario.saldo}"></h:inputText>
+                <h:commandButton value="Cadastrar" action="#{loginBean.gravar()}"></h:commandButton>
+            </fieldset>
+        </h:form>
+        <h:form>
+            <fieldset>
+                <legend>Login</legend>
+                <h:outputText value="Usuário: "></h:outputText>
+                <h:inputText value="#{loginBean.usuario.nomeUsuario}"></h:inputText>
+                <h:outputText value="Senha: "></h:outputText>
+                <h:inputSecret value="#{loginBean.usuario.senha}"></h:inputSecret>
+                <h:commandButton value="Entrar" action="#{loginBean.envia()}"></h:commandButton>
+            </fieldset>
+        </h:form>
+        <h:form>
+            <fieldset>
+                <legend>Saldo Total</legend>
+            </fieldset>
+        </h:form>
+        <h:form>
+            <fieldset>
+                <legend>Cadastrar Nova Conta</legend>
+                <h:panelGrid columns="4">
+                    <h:outputText value="Valor"/>
+                    <h:inputText value="#{contaBean.conta.valor}"/>
+                    <h:outputText value="Data"/>
+                    <h:inputText value="#{contaBean.conta.data}"/>
+                    <h:outputText value="Descrição"/>
+                    <h:inputText value="#{contaBean.conta.ident}"/>
+                    <h:outputText value="Tipo"/>
+                    <h:selectOneRadio value="#{contaBean.conta.tipo}">
+                        <f:selectItem itemValue="false" itemLabel="Despesa"></f:selectItem>
+                        <f:selectItem itemValue="true" itemLabel="Ganho"></f:selectItem>
+                    </h:selectOneRadio>                   
+                    <h:commandButton value="Salvar" action="#{contaBean.gravar()}"/>
+                </h:panelGrid>
+            </fieldset>
+        </h:form>                
+        <f:view>
+            <h:form>
+                <h1><h:outputText value="Histórico de Despesas"/></h1>
+                <h:dataTable value="#{contaBean.listarDeb()}" var="item" border="4">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="ID"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="VALOR"/>
+                        </f:facet>
+                        <h:outputText value="#{item.valor}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="DATA"/>
+                        </f:facet>
+                        <h:outputText value="#{item.data}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="DESCRIÇÃO"/>
+                        </f:facet>
+                        <h:outputText value="#{item.ident}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="AÇÃO"/>
+                        </f:facet>
+                        <h:commandLink action="#{contaBean.remover()}" value="Excluir"></h:commandLink>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>
+        <f:view>
+            <h:form>
+                <h1><h:outputText value="Histórico de Ganhos"/></h1>
+                <h:dataTable value="#{contaBean.listarCre()}" var="item" border="4">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="ID"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="VALOR"/>
+                        </f:facet>
+                        <h:outputText value="#{item.valor}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="DATA"/>
+                        </f:facet>
+                        <h:outputText value="#{item.data}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="DESCRIÇÃO"/>
+                        </f:facet>
+                        <h:outputText value="#{item.ident}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="AÇÃO"/>
+                        </f:facet>
+                        <h:commandLink action="#{contaBean.remover()}" value="Excluir"></h:commandLink>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>
+        
+
+    </h:body>
+</html>
+
